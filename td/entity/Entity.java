@@ -8,11 +8,14 @@
  */
 package td.entity;
 
+import td.graphics.Sprite;
+
 public class Entity {
-	public int x, xb;
-	public int y, yb;
-	private boolean isVisible, isAlive;
-	public enum attackType {
+	protected int x, xb;			// changed to protected from private
+	protected int y, yb;			// changed to protected from private
+	protected boolean isVisible, isAlive;	// changed to protected from private
+	protected Sprite sprite;		// Added sprite to this class for subclass use
+	protected enum attackType {
 		FIRE, ICE, LIGHTNING, EARTH
 	}
 	
