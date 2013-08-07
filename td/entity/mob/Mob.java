@@ -10,12 +10,12 @@ public class Mob extends Entity {
 	private int currHealth;
 	private int armorValue;
 	private int attackDamage;
-	private int movementSpeed;
-	private int speedMod = 1;	// speed modifier - if we want to have a tower that slows mobs
+	private float movementSpeed;
+	private float speedMod;	// speed modifier - if we want to have a tower that slows mobs
 	private float fireResist, iceResist, lightningResist, earthResist;
 	
 	// Constructor
-	public Mob(int mH, int aV, int aD, int mS, int i, int k,
+	public Mob(int mH, int aV, int aD, float mS, float i, float k,
 			   float fR, float iR, float lR, float eR) {
 		this.maxHealth = mH;
 		this.armorValue = aV;
@@ -27,10 +27,11 @@ public class Mob extends Entity {
 		this.iceResist = iR;
 		this.lightningResist = lR;
 		this.earthResist = eR;
+		this.speedMod = 1; // speed modifier - if we want to have a tower that slows mobs
 	}
 	
-	// Move command, takes in standard movement of 1 and modifies it
-	public void move(int i, int k) {
+	// Move command, will take in standard movement speed of 1/2 tile per second and modifies it
+	public void move(float i, float k) {
 		x = x + ((i * movementSpeed) / speedMod);
 		y = y + ((k * movementSpeed) / speedMod);
 	}

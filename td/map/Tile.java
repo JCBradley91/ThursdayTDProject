@@ -8,6 +8,7 @@
  */
 package td.map;
 
+import td.Game;
 import td.graphics.Sprite;
 import java.awt.Image;
 
@@ -22,8 +23,8 @@ public class Tile {
 	public Tile(String img, int ID) {
 		this.tileID = ID;
 		sprite = new Sprite(img);
-		w = sprite.getWidth();
-		h = sprite.getHeight();
+		w = sprite.getWidth() * Game.SCALE;
+		h = sprite.getHeight() * Game.SCALE;
 	}
 	
 	// Returns the tileID

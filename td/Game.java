@@ -29,6 +29,7 @@ public class Game implements Runnable {
 	public Screen screen;
 	public ArrayList Mobs;
 	public ArrayList Towers;
+	public float standardMovementSpeed; // will bet set to 1/2 a tile per second
 	
 	// game constructor, calls init
 	public Game() {
@@ -40,6 +41,7 @@ public class Game implements Runnable {
 	private void init() {
 		map = new Map(15, 15);
 		screen = new Screen(this);
+		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 	}
 	
 	// the nervous system of the game, handles all background processes
