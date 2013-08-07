@@ -14,6 +14,8 @@ package td.map;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import td.Game;
+
 
 public class Map {
 
@@ -34,8 +36,8 @@ public class Map {
 				this.mapGrid[i][k] = new Tile("artAssets/grass.png", TileID++);
 			}
 		}
-		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth;
-		mapHeightPixels = mapGrid[0][0].getHeight() * mapHeight;
+		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth * Game.SCALE;
+		mapHeightPixels = mapGrid[0][0].getHeight() * mapHeight * Game.SCALE;
 		generateMapImage();
 	}
 
@@ -74,8 +76,12 @@ public class Map {
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
 				Tile temp = mapGrid[i][k];
-				g.drawImage(temp.getImage(), i * temp.getWidth(),
-						k * temp.getHeight(), null);
+				int tempx = i * (temp.getWidth() * Game.SCALE);
+				int tempy = k * (temp.getHeight() * Game.SCALE);
+				g.drawImage(temp.getImage(), tempx, tempy, 
+						temp.getWidth() * Game.SCALE, 
+						temp.getHeight() * Game.SCALE,
+						null);
 			}
 		}
 		hasChanged = false;

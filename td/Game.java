@@ -19,8 +19,9 @@ import td.graphics.Screen;
 public class Game implements Runnable {
 
 	private static final String NAME = "TD - Thursday Build";
-	public static final int HEIGHT = 720;
-	public static final int WIDTH = 1280;
+	public static final int SCALE = 2;
+	//public static final int HEIGHT = 720;
+	//public static final int WIDTH = 1280;
 	
 	public Boolean inGame = false;
 	public Map map;
@@ -35,7 +36,7 @@ public class Game implements Runnable {
 	}
 	
 	private void init() {
-		map = new Map(30, 30);
+		map = new Map(20, 20);
 		screen = new Screen(this);
 	}
 	
