@@ -23,8 +23,11 @@ public class Screen extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 6468166128684414161L;
+	
+	// set up needed variables 
 	private Game game;
 	
+	// Constructor
 	public Screen(Game gme) {
 		game = gme;
 		setFocusable(true);
@@ -33,16 +36,20 @@ public class Screen extends JPanel {
 		//setPreferredSize(new Dimension(game.map.getWidth(), game.map.getHeight()));
 	}
 	
+	// used by the paintComponent I think?
 	public void addNotify() {
 		super.addNotify();
 	}
 	
+	// called by repaint(); - the way this is set up, this class is similar to a graphics handler
+	// 		other objects are responsible for creating their image, but screen.java actually renders it
+	//	still needs generated images of the Towers, Bullets, and Mobs
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		
 		if (game.inGame == true) {
-			g2d.drawImage(game.map.getMapImage(), null, 0, 0);
+			g2d.drawImage(game.map.getMapImage(), null, 0, 0); // render the background map
 		}
 		
 		Toolkit.getDefaultToolkit().sync();
@@ -50,6 +57,7 @@ public class Screen extends JPanel {
 	    
 	}
 	
+	// called by the main game loop
 	public void render() {
 		repaint();
 	}

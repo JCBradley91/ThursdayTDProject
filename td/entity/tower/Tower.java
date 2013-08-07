@@ -1,6 +1,6 @@
 package td.entity.tower;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import td.entity.Entity;
 import td.entity.bullet.Bullet;
@@ -8,16 +8,20 @@ import td.entity.mob.Mob;
 
 public class Tower extends Entity {
 	
-	private int attackDamage;
+	// set up needed variables
+	public int attackDamage;
 	private int bulletSpeed;
 	private int attackSpeed;
-	private attackType atkTyp;
+	public attackType atkTyp;
 	
-	private Bullet bulletType;
-	private List<Bullet> bulletList; 
-	private int maxBullets;
+	// set up an ArrayList of bullets and associated variables
+	//bulletType; - we need to set up what kind of bullet a tower fires
+	private ArrayList<Bullet> bulletList; 
+	private int maxActiveBullets;		// this could be re-worked to function similar to how robocode did with weapon heat
 	private int currentActiveBullets;
 	
+	
+	// Constructor
 	public Tower(int iTile, int kTyle, attackType aT, int aD, int aS,
 			int bS, int maxBl) {
 		this.x = iTile;
@@ -26,16 +30,12 @@ public class Tower extends Entity {
 		this.attackDamage = aD;
 		this.attackSpeed = aS;
 		this.bulletSpeed = bS;
-		this.maxBullets = maxBl;
+		this.maxActiveBullets = maxBl;
 	}
 	
+	// When the turret fires, this is called and adds a new bullet to the bulletList ArrayList
 	public void shootBullet(Mob m) {
 		//bulletList.add();
-	}
-	
-	public void doHurt(Mob m) {
-		m.takeDamage(attackDamage, atkTyp);
-	}
-	
+	}	
 	
 }

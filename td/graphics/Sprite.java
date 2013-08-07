@@ -18,10 +18,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Sprite {
+	
+	// set up needed variables
 	private BufferedImage spriteIMG;
-	private String resourceLocation;
+	private String resourceLocation; // we might not need this... if performance becomes an issue we can try and remove it
 	private int spriteWidth, spriteHeight;
 	
+	// Constructor
 	public Sprite(String imgString) {
 		this.resourceLocation = imgString;
 		try {
@@ -35,14 +38,17 @@ public class Sprite {
 		spriteHeight = spriteIMG.getHeight();
 	}
 	
+	// Returns the sprite height
 	public int getHeight() {
 		return spriteHeight;
 	}
 	
+	// Returns the sprite width
 	public int getWidth() {
 		return spriteWidth;
 	}
 	
+	// Returns the BufferedImage of the sprite... might not be needed?
 	public BufferedImage getImage() {
 		return spriteIMG;
 	}

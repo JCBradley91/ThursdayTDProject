@@ -19,31 +19,35 @@ import td.graphics.Screen;
 public class Game implements Runnable {
 
 	private static final String NAME = "TD - Thursday Build";
-	public static final int SCALE = 3;
+	public static final int SCALE = 3; // controls the game's scale... 3 seems like a good number for now
 	//public static final int HEIGHT = 720;
 	//public static final int WIDTH = 1280;
 	
+	// creates needed variables
 	public Boolean inGame = false;
 	public Map map;
 	public Screen screen;
-	
 	public ArrayList Mobs;
 	public ArrayList Towers;
 	
+	// game constructor, calls init
 	public Game() {
 		inGame = false;
 		init();
 	}
 	
+	// creates new instance of map and screen
 	private void init() {
 		map = new Map(15, 15);
 		screen = new Screen(this);
 	}
 	
+	// the nervous system of the game, handles all background processes
 	private void tick() {
 		
 	}
 	
+	// handles the rendering of the game, takes place after tick if needed
 	public void render() {
 		map.render();
 		
@@ -91,6 +95,8 @@ public class Game implements Runnable {
 		}
 	}	
 
+	// Main call - creates a new instance of Game and sets up a JFrame
+	//	then adds game.screen (JPanel)
 	public static void main(String[] args) {
 		Game game = new Game();
 		
