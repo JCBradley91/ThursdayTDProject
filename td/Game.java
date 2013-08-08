@@ -19,7 +19,7 @@ import td.graphics.Screen;
 public class Game implements Runnable {
 
 	private static final String NAME = "TD - Thursday Build";
-	public static final int SCALE = 3; // controls the game's scale... 3 seems like a good number for now
+	public static final int SCALE = 2; // controls the game's scale... 3 seems like a good number for now
 	//public static final int HEIGHT = 720;
 	//public static final int WIDTH = 1280;
 	
@@ -39,7 +39,7 @@ public class Game implements Runnable {
 	
 	// creates new instance of map and screen
 	private void init() {
-		map = new Map(15, 15);
+		map = new Map(12, 12);
 		screen = new Screen(this);
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 	}

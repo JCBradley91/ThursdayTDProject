@@ -30,7 +30,7 @@ public class Map {
 	// Constructor - this will need to be modified once we have a config file set up for maps
 	//		currently only creates tiles of grass
 	public Map(int width, int height) {
-		this.mapGrid = new Tile[height][width]; // Map is nothing more than a 2D array of Tiles
+		this.mapGrid = new Tile[width][height]; // Map is nothing more than a 2D array of Tiles
 		TileID = 0;
 		mapWidth = width;
 		mapHeight = height;
