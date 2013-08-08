@@ -1,3 +1,20 @@
+This is a tower defense game.
+
+To do:
+	Come up with a Map file format for custom maps
+	Add towers and mobs
+	Add a map pathfinder
+	Complete the tick() for each game component
+	write a graphics handler for mobs, towers, and bullets
+	Implement UI
+	Create in-game currency
+
+
+
+#########################################################
+	The below older format will no longer be used
+#########################################################
+
 #########################################################
 # This document will contain more detailed descriptions	#
 #  of what has been changed when merging a project or	#
