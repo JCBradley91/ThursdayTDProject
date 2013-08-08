@@ -1,5 +1,8 @@
 package td.entity.bullet;
 
+import java.util.Iterator;
+
+import td.Game;
 import td.entity.Entity;
 import td.entity.mob.Mob;
 import td.entity.tower.Tower;
@@ -35,8 +38,18 @@ public class Bullet extends Entity {
 	}
 	
 	// sets isAlive to false to trigger the death animation (explosion for bullets?)
-	public void onBulletConnect(){
+	public void onBulletConnectMob(){
 		doHurt(targetMob);
+		this.isAlive = false;
+	}
+	
+	// check each mob to see if it's inside the target tile, then do damage if true
+	public void onBulletConnectTile() {
+		Iterator<Mob> iT = Game.mobs.iterator();
+		while (iT.hasNext()) {
+			Mob m = iT.next();
+			if (m.getInTileID() == targetTile.getID()) doHurt(m);
+		}
 		this.isAlive = false;
 	}
 	

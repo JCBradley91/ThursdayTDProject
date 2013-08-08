@@ -10,10 +10,14 @@ package td;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import td.map.Map;
+import td.entity.mob.Mob;
+import td.entity.tower.Tower;
 import td.graphics.Screen;
 
 public class Game implements Runnable {
@@ -24,12 +28,12 @@ public class Game implements Runnable {
 	//public static final int WIDTH = 1280;
 	
 	// creates needed variables
-	public Boolean inGame = false;
-	public Map map;
-	public Screen screen;
-	public ArrayList Mobs;
-	public ArrayList Towers;
-	public float standardMovementSpeed; // will bet set to 1/2 a tile per second
+	public static Boolean inGame = false;
+	public static Map map;
+	public static Screen screen;
+	public static List<Mob> mobs = new ArrayList<Mob>();
+	public static List<Tower> towers = new ArrayList<Tower>();
+	public static float standardMovementSpeed; // will bet set to 1/2 a tile per second
 	
 	// game constructor, calls init
 	public Game() {
@@ -46,7 +50,19 @@ public class Game implements Runnable {
 	
 	// the nervous system of the game, handles all background processes
 	private void tick() {
+		// First we do all of the processing for the mobs
+		Iterator<Mob> iT1 = mobs.iterator();
+		while (iT1.hasNext()) {
+			Mob m = iT1.next();
+			m.tick();
+		}
 		
+		// next we process the towers
+		Iterator<Tower> iT2 = towers.iterator();
+		while (iT2.hasNext()) {
+			Tower t = iT2.next();
+			t.tick();
+		}
 	}
 	
 	// handles the rendering of the game, takes place after tick if needed
@@ -105,7 +121,7 @@ public class Game implements Runnable {
 		JFrame frame = new JFrame(Game.NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(game.map.getWidthPixels(), game.map.getWidthPixels());
+		frame.setSize(game.map.getWidthPixels(), game.map.getHeightPixels());
 		//frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);

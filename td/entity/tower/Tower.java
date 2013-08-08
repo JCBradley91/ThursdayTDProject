@@ -1,6 +1,7 @@
 package td.entity.tower;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import td.entity.Entity;
 import td.entity.bullet.Bullet;
@@ -37,5 +38,13 @@ public class Tower extends Entity {
 	public void shootBullet(Mob m) {
 		//bulletList.add();
 	}	
+	
+	public void tick() {
+		Iterator<Bullet> iT = bulletList.iterator();
+		while (iT.hasNext()) {
+			Bullet b = iT.next();
+			b.tick();
+		}
+	}
 	
 }

@@ -1,5 +1,6 @@
 package td.entity.mob;
 
+import td.Game;
 import td.entity.Entity;
 
 public class Mob extends Entity {
@@ -10,6 +11,7 @@ public class Mob extends Entity {
 	private int currHealth;
 	private int armorValue;
 	private int attackDamage;
+	private int inTileID;
 	private float movementSpeed;
 	private float speedMod;	// speed modifier - if we want to have a tower that slows mobs
 	private float fireResist, iceResist, lightningResist, earthResist;
@@ -34,6 +36,10 @@ public class Mob extends Entity {
 	public void move(float i, float k) {
 		x = x + ((i * movementSpeed) / speedMod);
 		y = y + ((k * movementSpeed) / speedMod);
+	}
+	
+	public int getInTileID() {
+		return inTileID;
 	}
 	
 	// Used for taking damage from a bullet... called by bullet.java
@@ -65,6 +71,12 @@ public class Mob extends Entity {
 		} else {
 			currHealth += dmg;
 		}
+	}
+	
+	// Tick - handles the gears
+	public void tick() {
+		
+		inTileID = (((int) x)* Game.map.getTile(0, 0).getWidth()) + ((int)y); // find the tile ID, for AOE shtuff
 	}
 	
 	
