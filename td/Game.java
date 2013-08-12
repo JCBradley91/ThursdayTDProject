@@ -43,7 +43,7 @@ public class Game implements Runnable {
 	
 	// creates new instance of map and screen
 	private void init() {
-		map = new Map(12, 12);
+		map = new Map(15, 15);
 		screen = new Screen(this);
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 	}

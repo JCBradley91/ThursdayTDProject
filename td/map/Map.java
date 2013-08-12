@@ -39,8 +39,8 @@ public class Map {
 				this.mapGrid[i][k] = new Tile("artAssets/grass.png", TileID++);
 			}
 		}
-		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth * Game.SCALE; // Sprite width * Tile width * scale
-		mapHeightPixels = mapGrid[0][0].getHeight() * mapHeight * Game.SCALE; // Sprite height * Tile height * scale
+		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth; // Sprite width * Tile width * scale
+		mapHeightPixels = mapGrid[0][0].getHeight() * mapHeight; // Sprite height * Tile height * scale
 		generateMapImage();
 	}
 
@@ -87,11 +87,11 @@ public class Map {
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
 				Tile temp = mapGrid[i][k];
-				int tempx = i * (temp.getWidth() * Game.SCALE);
-				int tempy = k * (temp.getHeight() * Game.SCALE);
+				int tempx = i * temp.getWidth();
+				int tempy = k * temp.getHeight();
 				g.drawImage(temp.getImage(), tempx, tempy, 
-						temp.getWidth() * Game.SCALE, 
-						temp.getHeight() * Game.SCALE,
+						temp.getWidth(), 
+						temp.getHeight(),
 						null);
 			}
 		}
