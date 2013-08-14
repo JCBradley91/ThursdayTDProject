@@ -103,16 +103,21 @@ public class Pathfinder {
 	
 	// I've written everything in init()
 	public void init() {
-		for (int i = 0; i < Game.map.getWidth(); i++) {
-			for (int k = 0; k < Game.map.getHeight(); k++) {
+		int mapWidth = Game.map.getWidth();
+		int mapHeight = Game.map.getHeight();
+		vertices = new ArrayList<Vertex>();
+		
+		for (int i = 0; i < mapWidth; i++) {
+			for (int k = 0; k < mapHeight; k++) {
 				Vertex v = new Vertex(new Integer(Game.map.getTile(i, k).getID()).toString());
+				v.adjacencies = new ArrayList<Edge>();
 				vertices.add(v);
 			}
 		}
 		
 		Iterator<Vertex> it = vertices.iterator();
-		for (int i = 0; i < Game.map.getWidth(); i++) {
-			for (int k = 0; k < Game.map.getHeight(); k++) {
+		for (int i = 0; i < mapWidth; i++) {
+			for (int k = 0; k < mapHeight; k++) {
 				Vertex v = it.next();
 				
 				// Check to see if there's a tile on the left
@@ -134,7 +139,7 @@ public class Pathfinder {
 				// Check to see if there's a tile on the right
 				if (i < Game.map.getWidth() - 1) {
 					if (Game.map.getTile(i + 1, k).canPass()) {
-						int rightTileID = ((i + 1) * Game.map.getHeight() + k);
+						int rightTileID = (((i + 1) * Game.map.getHeight()) + k);
 						v.adjacencies.add(new Edge(vertices.get(rightTileID), 1));
 					}
 				}
@@ -152,19 +157,9 @@ public class Pathfinder {
 			}
 		}
 		
-		// Remove each vertex that doesn't have an edge tied to it
-		// 	by adding good ones to a new List
-		for (Vertex v : vertices) {
-			if (v.adjacencies != null) {
-				modVert.add(v);
-			}
-		}
+		computePaths(vertices.get(Game.map.startTileID));
 		
-		computePaths(modVert.get(0));
-		for (Vertex v : modVert) {
-			System.out.println("Distance to " + v + ": " + v.minDistance);
-			path = getShortestPathTo(v);
-			System.out.println("Path: " + path);
-		}
+		path = getShortestPathTo(vertices.get(Game.map.endTileID));
+		System.out.println(path);
 	}
 }
