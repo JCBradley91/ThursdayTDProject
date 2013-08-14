@@ -36,7 +36,7 @@ public class Map {
 		mapHeight = height;
 		for (int i = 0; i < width; i++) {
 			for (int k = 0; k < height; k++) {
-				this.mapGrid[i][k] = new Tile("artAssets/grass.png", TileID++);
+				this.mapGrid[i][k] = new Tile("artAssets/grass.png", TileID++, true);
 			}
 		}
 		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth; // Sprite width * Tile width * scale
@@ -99,16 +99,16 @@ public class Map {
 	}
 
 	// Changes a specific Tile in the map by Tile ID
-	public void changeTile(String img, int ID) {
+	public void changeTile(String img, int ID, boolean bool) {
 		// use black magic to find the location in the grid
 		mapGrid[(int) (Math.floor(ID / mapWidth))][(ID % mapWidth)] = new Tile(
-				img, ID);
+				img, ID, bool);
 		hasChanged = true;
 	}
 	
 	// Changes a specific Tile in the map by x and y coordinate
-	public void changeTile(String img, int i, int k) {
-		mapGrid[i][k] = new Tile(img, ((i * mapHeight) + k));
+	public void changeTile(String img, int i, int k, boolean bool) {
+		mapGrid[i][k] = new Tile(img, ((i * mapHeight) + k), bool);
 		hasChanged = true;
 	}
 
