@@ -155,7 +155,7 @@ public class Map {
 	// Changes a specific Tile in the map by Tile ID
 	public void changeTile(String img, int ID, boolean bool) {
 		// use black magic to find the location in the grid
-		mapGrid[(int) (Math.floor(ID / mapWidth))][(ID % mapWidth)] = new Tile(
+		mapGrid[(int) (Math.floor(ID / mapHeight))][(ID % mapHeight)] = new Tile(
 				img, ID, bool);
 		hasChanged = true;
 	}
