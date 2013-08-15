@@ -141,8 +141,10 @@ public class Map {
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
 				Tile temp = mapGrid[i][k];
+				// We subtract k from mapHeight 
+				// so that the image renders properly
 				int tempx = i * temp.getWidth();
-				int tempy = k * temp.getHeight();
+				int tempy = (mapHeight - 1 - k) * temp.getHeight();
 				g.drawImage(temp.getImage(), tempx, tempy, temp.getWidth(),
 						temp.getHeight(), null);
 			}
