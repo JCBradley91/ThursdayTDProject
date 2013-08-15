@@ -24,7 +24,7 @@
    Retrieved from: http://en.literateprograms.org/Dijkstra's_algorithm_(Java)?oldid=15444
 */
 
-package td.map;
+package td.map.pathfinder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +36,6 @@ import td.Game;
 
 public class Pathfinder {
 	private List<Vertex> vertices;
-	private List<Vertex> modVert;
 	public List<Vertex> path;
 	
 	public static void computePaths(Vertex source) {

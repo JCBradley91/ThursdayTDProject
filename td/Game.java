@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import td.map.Map;
-import td.map.Pathfinder;
+import td.map.pathfinder.Pathfinder;
 import td.entity.mob.Mob;
 import td.entity.tower.Tower;
 import td.graphics.Screen;
@@ -125,11 +125,11 @@ public class Game implements Runnable {
 		JFrame frame = new JFrame(Game.NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(game.map.getWidthPixels(), game.map.getHeightPixels());
+		frame.setSize(Game.map.getWidthPixels(), Game.map.getHeightPixels());
 		//frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(game.screen, BorderLayout.CENTER);
+		frame.add(Game.screen, BorderLayout.CENTER);
 		frame.setVisible(true);
 		
 		game.run();

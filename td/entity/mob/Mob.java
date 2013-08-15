@@ -119,7 +119,8 @@ public class Mob extends Entity {
 	// Tick - handles the gears
 	public void tick() {
 
-		// find the tile ID, for AOE shtuff
+		move1();
+		// find the tile ID, for AOE shtuff & Pathfinding
 		int currTile = (((int) x) * Game.map.getTile(0, 0).getWidth())
 				+ ((int) y);
 		if (inTileID != currTile) {

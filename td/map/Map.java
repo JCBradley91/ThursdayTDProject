@@ -14,8 +14,6 @@ package td.map;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import td.Game;
-
 public class Map {
 
 	// Set up needed variables

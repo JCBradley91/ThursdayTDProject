@@ -25,11 +25,9 @@ public class Screen extends JPanel {
 	private static final long serialVersionUID = 6468166128684414161L;
 	
 	// set up needed variables 
-	private Game game;
 	
 	// Constructor
 	public Screen(Game gme) {
-		game = gme;
 		setFocusable(true);
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
@@ -48,8 +46,8 @@ public class Screen extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		
-		if (game.inGame == true) {
-			g2d.drawImage(game.map.getMapImage(), null, 0, 0); // render the background map
+		if (Game.inGame == true) {
+			g2d.drawImage(Game.map.getMapImage(), null, 0, 0); // render the background map
 		}
 		
 		Toolkit.getDefaultToolkit().sync();
