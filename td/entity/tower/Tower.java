@@ -39,6 +39,11 @@ public class Tower extends Entity {
 		//bulletList.add();
 	}	
 	
+	// We'll need a function to remove the tower for upgrading and recycling purposes
+	public void removeTower(){
+	}
+	
+	
 	public void tick() {
 		Iterator<Bullet> iT = bulletList.iterator();
 		while (iT.hasNext()) {
