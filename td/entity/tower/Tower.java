@@ -42,6 +42,11 @@ public class Tower extends Entity {
 	public void shootBullet(Mob m) {
 		//bulletList.add();
 	}	
+
+	// We'll need a function to remove the tower for upgrading and recycling purposes
+	public void removeTower(){
+	}
+	
 	
 	// The backbone of the tower
 	public void tick() {
