@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import td.map.Map;
+import td.map.pathfinder.Pathfinder;
 import td.entity.mob.Mob;
 import td.entity.tower.Tower;
 import td.graphics.Screen;
@@ -30,6 +31,7 @@ public class Game implements Runnable {
 	// creates needed variables
 	public static Boolean inGame = false;
 	public static Map map;
+	public static Pathfinder path;
 	public static Screen screen;
 	public static List<Mob> mobs = new ArrayList<Mob>();
 	public static List<Tower> towers = new ArrayList<Tower>();
@@ -44,6 +46,8 @@ public class Game implements Runnable {
 	// creates new instance of map and screen
 	private void init() {
 		map = new Map(15, 15);
+		path = new Pathfinder();
+		path.init();
 		screen = new Screen(this);
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 	}
@@ -121,11 +125,11 @@ public class Game implements Runnable {
 		JFrame frame = new JFrame(Game.NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(game.map.getWidthPixels(), game.map.getHeightPixels());
+		frame.setSize(Game.map.getWidthPixels(), Game.map.getHeightPixels());
 		//frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(game.screen, BorderLayout.CENTER);
+		frame.add(Game.screen, BorderLayout.CENTER);
 		frame.setVisible(true);
 		
 		game.run();

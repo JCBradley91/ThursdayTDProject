@@ -17,14 +17,21 @@ public class Tile {
 	// Set up needed variables
 	private Sprite sprite;
 	private final int tileID;
+	private boolean isPassable;
 	private int w, h; // might not be needed... could just call sprite.getWidth and sprite.getHeight instead of taking up more memory
 	
 	// Constructor - could maybe use a second constructor that takes in an x and y and then converts them to a tileID
-	public Tile(String img, int ID) {
+	public Tile(String img, int ID, boolean bool) {
 		this.tileID = ID;
 		sprite = new Sprite(img);
+		isPassable = bool;
 		w = sprite.getWidth() * Game.SCALE;
 		h = sprite.getHeight() * Game.SCALE;
+	}
+	
+	// Returns whether or not the tile can be moved through
+	public boolean canPass() {
+		return isPassable;
 	}
 	
 	// Returns the tileID
