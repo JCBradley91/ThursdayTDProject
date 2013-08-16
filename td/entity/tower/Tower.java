@@ -41,6 +41,7 @@ public class Tower extends Entity {
 	
 	// We'll need a function to remove the tower for upgrading and recycling purposes
 	public void removeTower() {
+		// Please work!
 	}
 	
 	
