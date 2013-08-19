@@ -127,9 +127,9 @@ public class Pathfinder {
 			}
 		}
 		
-		computePaths(vertices.get(Game.map.startTileID));
+		computePaths(vertices.get(Game.map.getStartTileID()));
 		
-		path = getShortestPathTo(vertices.get(Game.map.endTileID));
+		path = getShortestPathTo(vertices.get(Game.map.getEndTileID()));
 		System.out.println(path);
 	}
 }

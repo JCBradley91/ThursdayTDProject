@@ -40,7 +40,7 @@ public class Mob extends Entity {
 	// Set the direction to move
 	public void move1() {
 		// check if we're in the last tile
-		if (inTileID == Game.map.endTileID) {
+		if (inTileID == Game.map.getEndTileID()) {
 			// Insert here what happens when the mobs reach the end
 		}
 		// make sure we're not on the bottom of the map already
