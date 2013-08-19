@@ -121,7 +121,7 @@ public class Mob extends Entity {
 
 		move1();
 		// find the tile ID, for AOE shtuff & Pathfinding
-		int currTile = (((int) x) * Game.map.getTile(0, 0).getWidth())
+		int currTile = (((int) x) * Game.map.getHeight())
 				+ ((int) y);
 		if (inTileID != currTile) {
 			inTileID = currTile;

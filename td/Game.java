@@ -29,12 +29,12 @@ public class Game implements Runnable {
 	//public static final int WIDTH = 1280;
 	
 	// creates needed variables
-	public static Boolean inGame = false;
-	public static Map map;
-	public static Pathfinder path;
-	public static Screen screen;
-	public static List<Mob> mobs = new ArrayList<Mob>();
-	public static List<Tower> towers = new ArrayList<Tower>();
+	public static Boolean inGame = false;		// variable used for checking the state of the game
+	public static Map map;						// one map per instance of game
+	public static Pathfinder path;				// public pathfinder for mob's use
+	public static Screen screen;				// one screen per instance of game
+	public static List<Mob> mobs = new ArrayList<Mob>();	// holds all of the mobs for a given level
+	public static List<Tower> towers = new ArrayList<Tower>();	// holds all of the towers for a given level
 	public static float standardMovementSpeed; // will bet set to 1/2 a tile per second
 	
 	// game constructor, calls init
@@ -45,10 +45,10 @@ public class Game implements Runnable {
 	
 	// creates new instance of map and screen
 	private void init() {
-		map = new Map(15, 15);
-		path = new Pathfinder();
+		map = new Map(15, 15); 			// creates a new map of the size 15 by 15 - will be replaced with map config file
+		path = new Pathfinder();		// creates our pathfinder and initiates
 		path.init();
-		screen = new Screen(this);
+		screen = new Screen(this);		// creates our screen, which is essentially our graphics handler
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 	}
 	
@@ -71,9 +71,9 @@ public class Game implements Runnable {
 	
 	// handles the rendering of the game, takes place after tick if needed
 	public void render() {
-		map.render();
+		map.render(); 			// map creates a buffered image that will be called by screen at the end of the loop
 		
-		screen.render();
+		screen.render();		// calls for the screen to put everything together
 	}
 		
 	@Override
@@ -129,7 +129,7 @@ public class Game implements Runnable {
 		//frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(Game.screen, BorderLayout.CENTER);
+		frame.add(Game.screen, BorderLayout.CENTER);	// adding the screen to the frame seems to force a render, trying to find workaround
 		frame.setVisible(true);
 		
 		game.run();

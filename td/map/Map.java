@@ -126,11 +126,6 @@ public class Map {
 		return endTileID;
 	}
 
-	// I don't think this is needed - might remove later?
-	public Tile[][] getMap() {
-		return mapGrid;
-	}
-
 	// Returns a specific Tile, by x and y coordinates
 	public Tile getTile(int x, int y) {
 		return mapGrid[x][y];
@@ -149,10 +144,8 @@ public class Map {
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
 				Tile temp = mapGrid[i][k];
-				// We subtract k from mapHeight 
-				// so that the image renders properly
 				int tempx = i * temp.getWidth();
-				int tempy = (mapHeight - 1 - k) * temp.getHeight();
+				int tempy = (mapHeight - 1 - k) * temp.getHeight(); 	// We subtract k from mapHeight so that the image doesn't render upside down
 				g.drawImage(temp.getImage(), tempx, tempy, temp.getWidth(),
 						temp.getHeight(), null);
 			}
@@ -174,7 +167,7 @@ public class Map {
 		hasChanged = true;
 	}
 
-	// WIP
+	// WIP - I'm not certain we even need anything done here
 	public void tick() {
 
 	}
