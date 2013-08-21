@@ -59,6 +59,7 @@ public class Bullet extends Entity {
 		m.takeDamage(tower.attackDamage, tower.atkTyp);
 	}
 	
+	// returns the sprite of the bullet - used by Tower for rendering
 	public Sprite getSprite() {
 		return sprite;
 	}

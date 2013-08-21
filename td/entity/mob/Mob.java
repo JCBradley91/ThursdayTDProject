@@ -2,6 +2,7 @@ package td.entity.mob;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.TimerTask;
 
 import td.Game;
 import td.entity.Entity;
@@ -21,6 +22,8 @@ public class Mob extends Entity {
 	private float fireResist, iceResist, lightningResist, earthResist;
 	private int tilesTraveled;
 	private BufferedImage mobRender;
+	private boolean targetTileChange;
+	private int facingDirection, oldDirection;
 
 	// Constructor
 	public Mob(int mH, int aV, int aD, float mS, float i, float k, float fR,
@@ -39,42 +42,67 @@ public class Mob extends Entity {
 							// slows mobs
 		this.tilesTraveled = 0; // keep track of where the mob is in the path to
 								// the end
+		this.timer.scheduleAtFixedRate(new ScheduleTask(), 10, 1000/60);
 	}
-	
+
 	// Set the direction to move
 	public void move1() {
+		if (targetTileChange) {
+			// make sure we're not already at the top of the map
+			if (inTileID % Game.map.getHeight() != Game.map.getHeight() - 1) { 
+				// move up?
+				if (inTileID + 1 == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
+					//move2(0, Game.standardMovementSpeed); // here's the important part
+					oldDirection = facingDirection;
+					facingDirection = 0;
+				}
+			} 
+			// make sure we're not already at the right edge of the map
+			if ((int) (Math.floor(inTileID / Game.map.getHeight())) != Game.map.getWidth() - 1) { 
+				// move right?
+				if (inTileID + Game.map.getHeight() == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
+					//move2(Game.standardMovementSpeed, 0); // here's the important part
+					oldDirection = facingDirection;
+					facingDirection = 1;
+				}
+			}
+			// make sure we're not on the bottom of the map already
+			if (inTileID % Game.map.getHeight() != 0){
+				// move down?
+				if (inTileID - 1 == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) { 
+					//move2(0, -Game.standardMovementSpeed); // here's the important part
+					oldDirection = facingDirection;
+					facingDirection = 2;
+				}
+			} 
+			// make sure we're not already on the left edge of the map
+			if ((int) (Math.floor(inTileID / Game.map.getHeight())) != 0) { 
+				// move left?
+				if (inTileID - Game.map.getHeight() == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
+					//move2(-Game.standardMovementSpeed, 0); // here's the important part
+					oldDirection = facingDirection;
+					facingDirection = 3;
+				}
+			} 
+		}
 		// check if we're in the last tile
 		if (inTileID == Game.map.getEndTileID()) {
 			// Insert here what happens when the mobs reach the end
 		}
-		// make sure we're not on the bottom of the map already
-		if (inTileID % Game.map.getHeight() != 0){
-			// move down?
-			if (inTileID - 1 == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) { 
-				move2(0, -Game.standardMovementSpeed); // here's the important part
-			}
-		} 
-		// make sure we're not already on the left edge of the map
-		if ((int) (Math.floor(inTileID / Game.map.getHeight())) != 0) { 
-			// move left?
-			if (inTileID - Game.map.getHeight() == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
-				move2(-Game.standardMovementSpeed, 0); // here's the important part
-			}
-		} 
-		// make sure we're not already at the top of the map
-		if (inTileID % Game.map.getHeight() != Game.map.getHeight() - 1) { 
-			// move up?
-			if (inTileID + 1 == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
-				move2(0, Game.standardMovementSpeed); // here's the important part
-			}
-		} 
-		// make sure we're not already at the right edge of the map
-		if ((int) (Math.floor(inTileID / Game.map.getHeight())) != Game.map.getWidth() - 1) { 
-			// move right?
-			if (inTileID + Game.map.getHeight() == Integer.parseInt(Game.path.path.get(tilesTraveled+1).toString())) {
-				move2(Game.standardMovementSpeed, 0); // here's the important part
-			}
+		
+		// take care of actually moving
+		if (facingDirection == 0) { // if facing forward
+			move2(0, Game.standardMovementSpeed);
+		} else if (facingDirection == 1) { // if facing right
+			move2(Game.standardMovementSpeed, 0);
+		} else if (facingDirection == 2) { // if facing down
+			move2(0, -Game.standardMovementSpeed);
+		} else if (facingDirection == 3) { // if facing left
+			move2(-Game.standardMovementSpeed, 0);
+		} else { 
+			move2(0, 0);
 		}
+		
 	}
 
 	// Move command, will take in standard movement speed of 1/2 tile per second
@@ -123,31 +151,38 @@ public class Mob extends Entity {
 	// Tick - handles the gears
 	public void tick() {
 
-		move1();
+		//move1();
 		// find the tile ID, for AOE shtuff & Pathfinding
-		int currTile = (((int) x) * Game.map.getHeight())
-				+ ((int) y);
+		int currTile = (((int) x) * Game.map.getHeight()) + ((int) y);
 		if (inTileID != currTile) {
 			inTileID = currTile;
 			tilesTraveled++;
+			targetTileChange = true;
 		}
 
 	}
-	
+
+	// Returns the buffered image, used by the graphics handler
 	public BufferedImage getRender() {
 		return mobRender;
 	}
-	
+
+	// renders the buffered image of the mob
 	public void render() {
 		mobRender = new BufferedImage(Game.map.getWidthPixels(),
-									  Game.map.getHeightPixels(),
-									  BufferedImage.TYPE_INT_ARGB);
+				Game.map.getHeightPixels(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = mobRender.createGraphics();
-		g.drawImage(this.sprite.getImage(),
-				   (int) x,
-				   (int) (Game.map.getHeightPixels() - y),
-				   this.sprite.getWidth() * Game.SCALE,
-				   this.sprite.getHeight() * Game.SCALE, null);
+		g.drawImage(this.sprite.getImage(), (int) x,
+				(int) (Game.map.getHeightPixels() - y), this.sprite.getWidth()
+						* Game.SCALE, this.sprite.getHeight() * Game.SCALE,
+				null);
+	}
+	
+	// for movement, since it's handled by a timer
+	class ScheduleTask extends TimerTask {
+		public void run() {
+			move1();
+		}
 	}
 
 }

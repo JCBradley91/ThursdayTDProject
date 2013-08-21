@@ -10,6 +10,8 @@
  */
 package td.entity;
 
+import java.util.Timer;
+
 import td.graphics.Sprite;
 
 public class Entity {
@@ -23,9 +25,12 @@ public class Entity {
 		FIRE, ICE, LIGHTNING, EARTH
 	}
 	
+	protected Timer timer;
+	
 	// Constructor
 	public Entity() {
 		isAlive = true;
+		timer = new Timer();
 	}
 	
 	// returns the x position of the entity

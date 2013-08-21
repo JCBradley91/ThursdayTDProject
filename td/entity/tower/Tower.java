@@ -43,6 +43,7 @@ public class Tower extends Entity {
 		//bulletList.add();
 	}	
 	
+	// The backbone of the tower
 	public void tick() {
 		Iterator<Bullet> iT = bulletList.iterator();
 		while (iT.hasNext()) {
@@ -51,10 +52,12 @@ public class Tower extends Entity {
 		}
 	}
 	
+	// returns the buffered image - used by the graphics handler
 	public BufferedImage getRender() {
 		return towerRender;
 	}
 	
+	// renders the buffered image in memory
 	public void render() {
 		towerRender = new BufferedImage(Game.map.getWidthPixels(),
 										Game.map.getHeightPixels(),

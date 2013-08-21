@@ -16,6 +16,8 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 import td.Game;
+import td.entity.mob.Mob;
+import td.entity.tower.Tower;
 
 public class Screen extends JPanel {
 
@@ -48,6 +50,12 @@ public class Screen extends JPanel {
 		
 		if (Game.inGame == true) {
 			g2d.drawImage(Game.map.getMapImage(), null, 0, 0); // render the background map
+			for (Tower t: Game.towers) {
+				g2d.drawImage(t.getRender(), null, 0, 0); // render all of the towers
+			}
+			for (Mob m : Game.mobs) {
+				g2d.drawImage(m.getRender(), null, 0, 0); // render all of the mobs
+			}
 		}
 		
 		Toolkit.getDefaultToolkit().sync();

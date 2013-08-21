@@ -50,6 +50,7 @@ public class Game implements Runnable {
 		path.init();
 		screen = new Screen(this);		// creates our screen, which is essentially our graphics handler
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
+		//mobs.add(new Mob())
 	}
 	
 	// the nervous system of the game, handles all background processes
@@ -72,7 +73,12 @@ public class Game implements Runnable {
 	// handles the rendering of the game, takes place after tick if needed
 	public void render() {
 		map.render(); 			// map creates a buffered image that will be called by screen at the end of the loop
-		
+		for (Tower t : towers) {
+			t.render(); 		// have all of the towers render their buffered image
+		}
+		for (Mob m : mobs) {
+			m.render();			// have all of the mobs rende their buffered image
+		}
 		screen.render();		// calls for the screen to put everything together
 	}
 		
@@ -105,7 +111,7 @@ public class Game implements Runnable {
 
 			if (shouldRender) {
 				frames++;
-				//render();
+				render();
 			}
 
 			if (System.currentTimeMillis() - lastTimer1 > 1000) {
