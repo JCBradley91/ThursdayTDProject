@@ -1,5 +1,8 @@
 package td.entity.mob;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 import td.Game;
 import td.entity.Entity;
 
@@ -17,6 +20,7 @@ public class Mob extends Entity {
 							// slows mobs
 	private float fireResist, iceResist, lightningResist, earthResist;
 	private int tilesTraveled;
+	private BufferedImage mobRender;
 
 	// Constructor
 	public Mob(int mH, int aV, int aD, float mS, float i, float k, float fR,
@@ -128,6 +132,22 @@ public class Mob extends Entity {
 			tilesTraveled++;
 		}
 
+	}
+	
+	public BufferedImage getRender() {
+		return mobRender;
+	}
+	
+	public void render() {
+		mobRender = new BufferedImage(Game.map.getWidthPixels(),
+									  Game.map.getHeightPixels(),
+									  BufferedImage.TYPE_INT_ARGB);
+		Graphics g = mobRender.createGraphics();
+		g.drawImage(this.sprite.getImage(),
+				   (int) x,
+				   (int) (Game.map.getHeightPixels() - y),
+				   this.sprite.getWidth() * Game.SCALE,
+				   this.sprite.getHeight() * Game.SCALE, null);
 	}
 
 }

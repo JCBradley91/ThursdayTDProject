@@ -1,8 +1,11 @@
 package td.entity.tower;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import td.Game;
 import td.entity.Entity;
 import td.entity.bullet.Bullet;
 import td.entity.mob.Mob;
@@ -14,6 +17,7 @@ public class Tower extends Entity {
 	private int bulletSpeed;
 	private int attackSpeed;
 	public attackType atkTyp;
+	private BufferedImage towerRender;
 	
 	// set up an ArrayList of bullets and associated variables
 	//bulletType; - we need to set up what kind of bullet a tower fires
@@ -44,6 +48,29 @@ public class Tower extends Entity {
 		while (iT.hasNext()) {
 			Bullet b = iT.next();
 			b.tick();
+		}
+	}
+	
+	public BufferedImage getRender() {
+		return towerRender;
+	}
+	
+	public void render() {
+		towerRender = new BufferedImage(Game.map.getWidthPixels(),
+										Game.map.getHeightPixels(),
+										BufferedImage.TYPE_INT_ARGB);
+		Graphics g = towerRender.createGraphics();
+		g.drawImage(this.sprite.getImage(),
+				    (int) x,
+				    (int) (Game.map.getHeightPixels() - y),
+				    this.sprite.getWidth() * Game.SCALE,
+				    this.sprite.getHeight() * Game.SCALE, null);
+		for (Bullet b: bulletList) {
+			g.drawImage(b.getSprite().getImage(),
+					    (int) b.getX(),
+					    (int) (Game.map.getHeightPixels() - b.getY()),
+					    b.getSprite().getWidth(),
+					    b.getSprite().getHeight(), null);
 		}
 	}
 	
