@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import td.map.Map;
 import td.map.pathfinder.Pathfinder;
 import td.entity.mob.Mob;
+import td.entity.mob.TestMob;
 import td.entity.tower.Tower;
 import td.graphics.Screen;
 
@@ -50,22 +51,20 @@ public class Game implements Runnable {
 		path.init();
 		screen = new Screen(this);		// creates our screen, which is essentially our graphics handler
 		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
-		//mobs.add(new Mob())
+		mobs = new ArrayList<Mob>();
+		towers = new ArrayList<Tower>();
+		mobs.add(new TestMob());
 	}
 	
 	// the nervous system of the game, handles all background processes
 	private void tick() {
 		// First we do all of the processing for the mobs
-		Iterator<Mob> iT1 = mobs.iterator();
-		while (iT1.hasNext()) {
-			Mob m = iT1.next();
+		for (Mob m : mobs) {
 			m.tick();
 		}
 		
 		// next we process the towers
-		Iterator<Tower> iT2 = towers.iterator();
-		while (iT2.hasNext()) {
-			Tower t = iT2.next();
+		for (Tower t : towers) {
 			t.tick();
 		}
 	}
