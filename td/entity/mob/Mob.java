@@ -24,6 +24,7 @@ public class Mob extends Entity {
 	private BufferedImage mobRender;
 	private boolean targetTileChange;
 	private int facingDirection, oldDirection;
+	private long enterTileTime;
 
 	// Constructor
 	public Mob(int mH, int aV, int aD, float mS, float i, float k, float fR,
@@ -95,6 +96,32 @@ public class Mob extends Entity {
 		}
 		
 		// take care of actually moving
+		if (enterTileTime + 1000 > System.currentTimeMillis()) {
+			if (oldDirection == 0) { // if facing forward
+				move2(0.0, Game.standardMovementSpeed);
+			} else if (oldDirection == 1) { // if facing right
+				move2(Game.standardMovementSpeed, 0.0);
+			} else if (oldDirection == 2) { // if facing down
+				move2(0.0, -Game.standardMovementSpeed);
+			} else if (oldDirection == 3) { // if facing left
+				move2(-Game.standardMovementSpeed, 0.0);
+			} else { // you've done something wrong
+				move2(0.0, 0.0);
+			}
+		} else { // if we've been in the tile for a whole second
+			if (facingDirection == 0) { // if facing forward
+				move2(0.0, Game.standardMovementSpeed);
+			} else if (facingDirection == 1) { // if facing right
+				move2(Game.standardMovementSpeed, 0.0);
+			} else if (facingDirection == 2) { // if facing down
+				move2(0.0, -Game.standardMovementSpeed);
+			} else if (facingDirection == 3) { // if facing left
+				move2(-Game.standardMovementSpeed, 0.0);
+			} else { // you've done something wrong
+				move2(0.0, 0.0);
+			}
+		}
+		// take care of actually moving
 		if (facingDirection == 0) { // if facing forward
 			move2(0.0, Game.standardMovementSpeed);
 		} else if (facingDirection == 1) { // if facing right
@@ -164,6 +191,7 @@ public class Mob extends Entity {
 			inTileID = currTile;
 			tilesTraveled++;
 			targetTileChange = true;
+			enterTileTime = System.currentTimeMillis();
 		}
 
 	}
@@ -179,8 +207,8 @@ public class Mob extends Entity {
 				Game.map.getHeightPixels(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = mobRender.createGraphics();
 		g.drawImage(this.sprite.getImage(), 
-				    (int) x,
-				    Game.map.getHeightPixels() - (int)(y),
+				    ((int) x) - (this.sprite.getWidth()),
+				    Game.map.getHeightPixels() - ((int)(y) + this.sprite.getHeight()),
 				    this.sprite.getWidth() * Game.SCALE,
 				    this.sprite.getHeight() * Game.SCALE, null);
 	}
