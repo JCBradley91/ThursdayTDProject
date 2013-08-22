@@ -178,10 +178,11 @@ public class Mob extends Entity {
 		mobRender = new BufferedImage(Game.map.getWidthPixels(),
 				Game.map.getHeightPixels(), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = mobRender.createGraphics();
-		g.drawImage(this.sprite.getImage(), (int) x,
-				(int) (Game.map.getHeightPixels() - y), this.sprite.getWidth()
-						* Game.SCALE, this.sprite.getHeight() * Game.SCALE,
-				null);
+		g.drawImage(this.sprite.getImage(), 
+				    (int) x,
+				    Game.map.getHeightPixels() - (int)(y),
+				    this.sprite.getWidth() * Game.SCALE,
+				    this.sprite.getHeight() * Game.SCALE, null);
 	}
 	
 	// for movement, since it's handled by a timer
