@@ -16,7 +16,6 @@ public class Mob extends Entity {
 	private int armorValue;
 	private int attackDamage;
 	private int inTileID;
-	private float x, y;
 	private float movementSpeed;
 	private float speedMod; // speed modifier - if we want to have a tower that
 							// slows mobs
@@ -97,22 +96,22 @@ public class Mob extends Entity {
 		
 		// take care of actually moving
 		if (facingDirection == 0) { // if facing forward
-			move2(0, Game.standardMovementSpeed);
+			move2(0.0, Game.standardMovementSpeed);
 		} else if (facingDirection == 1) { // if facing right
-			move2(Game.standardMovementSpeed, 0);
+			move2(Game.standardMovementSpeed, 0.0);
 		} else if (facingDirection == 2) { // if facing down
-			move2(0, -Game.standardMovementSpeed);
+			move2(0.0, -Game.standardMovementSpeed);
 		} else if (facingDirection == 3) { // if facing left
-			move2(-Game.standardMovementSpeed, 0);
+			move2(-Game.standardMovementSpeed, 0.0);
 		} else { // you've done something wrong
-			move2(0, 0);
+			move2(0.0, 0.0);
 		}
 		
 	}
 
 	// Move command, will take in standard movement speed of 1/2 tile per second
 	// and modifies it
-	public void move2(float i, float k) {
+	public void move2(double i, double k) {
 		x += ((i * movementSpeed) / speedMod);
 		y += ((k * movementSpeed) / speedMod);
 	}

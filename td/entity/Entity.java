@@ -16,8 +16,8 @@ import td.graphics.Sprite;
 
 public class Entity {
 	// set up needed variables
-	protected float x, xb;			// changed to protected from private - these probably need changed to floats?
-	protected float y, yb;			// changed to protected from private
+	protected double x;			// changed to protected from private - these probably need changed to floats?
+	protected double y;			// changed to protected from private
 	protected int onTileByID;		// keeps track of what tile the entity is located inside
 	protected boolean isVisible, isAlive;	// changed to protected from private
 	protected Sprite sprite;		// Added sprite to this class for subclass use
@@ -34,12 +34,12 @@ public class Entity {
 	}
 	
 	// returns the x position of the entity
-	public float getX() {
+	public double getX() {
 		return x;
 	}
 	
 	// returns the y position of the entity
-	public float getY() {
+	public double getY() {
 		return y;
 	}
 	
