@@ -36,7 +36,7 @@ public class Game implements Runnable {
 	public static Screen screen;				// one screen per instance of game
 	public static List<Mob> mobs = new ArrayList<Mob>();	// holds all of the mobs for a given level
 	public static List<Tower> towers = new ArrayList<Tower>();	// holds all of the towers for a given level
-	public static float standardMovementSpeed; // will bet set to 1/2 a tile per second
+	public static float standardMovementSpeed = 0; // will bet set to 1/2 a tile per second
 	
 	// game constructor, calls init
 	public Game() {
@@ -50,7 +50,11 @@ public class Game implements Runnable {
 		path = new Pathfinder();		// creates our pathfinder and initiates
 		path.init();
 		screen = new Screen(this);		// creates our screen, which is essentially our graphics handler
-		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
+		float tempw1 = map.getTile(0, 0).getWidth();
+		float tempw2 = tempw1 / 2;
+		float tempw3 = tempw2 / 60;
+		standardMovementSpeed = tempw3;
+		//standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
 		mobs = new ArrayList<Mob>();
 		towers = new ArrayList<Tower>();
 		mobs.add(new TestMob());

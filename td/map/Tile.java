@@ -25,8 +25,8 @@ public class Tile {
 		this.tileID = ID;
 		sprite = new Sprite(img);
 		isPassable = bool;
-		w = sprite.getWidth() * Game.SCALE;
-		h = sprite.getHeight() * Game.SCALE;
+		this.w = sprite.getWidth() * Game.SCALE;
+		this.h = sprite.getHeight() * Game.SCALE;
 	}
 	
 	// Returns whether or not the tile can be moved through

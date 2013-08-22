@@ -32,9 +32,11 @@ public class Vertex implements Comparable<Vertex> {
 	public List<Edge> adjacencies;
 	public double minDistance = Double.POSITIVE_INFINITY;
 	public Vertex previous;
+	private int ID;
 
-	public Vertex(String argName) {
+	public Vertex(String argName,int id) {
 		name = argName;
+		this.ID = id;
 	}
 
 	public String toString() {
@@ -43,6 +45,10 @@ public class Vertex implements Comparable<Vertex> {
 
 	public int compareTo(Vertex other) {
 		return Double.compare(minDistance, other.minDistance);
+	}
+	
+	public int getID() {
+		return ID;
 	}
 }
 

@@ -79,7 +79,7 @@ public class Pathfinder {
 		
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
-				Vertex v = new Vertex(new Integer(Game.map.getTile(i, k).getID()).toString());
+				Vertex v = new Vertex(new Integer(Game.map.getTile(i, k).getID()).toString(), Game.map.getTile(i, k).getID());
 				v.adjacencies = new ArrayList<Edge>();
 				vertices.add(v);
 			}
