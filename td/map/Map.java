@@ -23,7 +23,7 @@ public class Map {
 	private int mapWidthPixels, mapHeightPixels;
 	private Boolean hasChanged;
 	private BufferedImage mapImage;
-	public int startTileID, endTileID;
+	private int startTileID, endTileID;
 	//public Pathfinder path;
 
 	// Constructor - this will need to be modified once we have a config file
@@ -115,10 +115,15 @@ public class Map {
 	public int getWidthPixels() {
 		return mapWidthPixels;
 	}
-
-	// I don't think this is needed - might remove later?
-	public Tile[][] getMap() {
-		return mapGrid;
+	
+	// returns the ID of the start tile of the map
+	public int getStartTileID() {
+		return startTileID;
+	}
+	
+	// returns the ID of the ending tile of the map
+	public int getEndTileID() {
+		return endTileID;
 	}
 
 	// Returns a specific Tile, by x and y coordinates
@@ -139,10 +144,8 @@ public class Map {
 		for (int i = 0; i < mapWidth; i++) {
 			for (int k = 0; k < mapHeight; k++) {
 				Tile temp = mapGrid[i][k];
-				// We subtract k from mapHeight 
-				// so that the image renders properly
 				int tempx = i * temp.getWidth();
-				int tempy = (mapHeight - 1 - k) * temp.getHeight();
+				int tempy = (mapHeight - 1 - k) * temp.getHeight(); 	// We subtract k from mapHeight so that the image doesn't render upside down
 				g.drawImage(temp.getImage(), tempx, tempy, temp.getWidth(),
 						temp.getHeight(), null);
 			}
@@ -164,7 +167,7 @@ public class Map {
 		hasChanged = true;
 	}
 
-	// WIP
+	// WIP - I'm not certain we even need anything done here
 	public void tick() {
 
 	}

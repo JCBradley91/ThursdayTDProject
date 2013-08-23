@@ -3,11 +3,13 @@ This is a tower defense game.
 To do:
 	Come up with a Map file format for custom maps
 	Add towers and mobs
-	Add a map pathfinder
 	Complete the tick() for each game component
 	write a graphics handler for mobs, towers, and bullets
 	Implement UI
 	Create in-game currency
+	
+Completed:
+	Add a map pathfinder
 
 
 

@@ -16,6 +16,7 @@ public class Bullet extends Entity {
 	private Tower tower;
 	private Mob targetMob;		// used when targeting a specific mob
 	private Tile targetTile;	// used when targeting a specific tile (AOE)
+	private Sprite sprite;
 	
 	
 	// Constructor for targeting a mob
@@ -56,5 +57,10 @@ public class Bullet extends Entity {
 	// applies damage to a specific mob, damage and attack type called from tower that fired
 	public void doHurt(Mob m) {
 		m.takeDamage(tower.attackDamage, tower.atkTyp);
+	}
+	
+	// returns the sprite of the bullet - used by Tower for rendering
+	public Sprite getSprite() {
+		return sprite;
 	}
 }

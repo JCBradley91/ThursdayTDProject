@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import td.map.Map;
 import td.map.pathfinder.Pathfinder;
 import td.entity.mob.Mob;
+import td.entity.mob.TestMob;
 import td.entity.tower.Tower;
 import td.graphics.Screen;
 
@@ -29,13 +30,13 @@ public class Game implements Runnable {
 	//public static final int WIDTH = 1280;
 	
 	// creates needed variables
-	public static Boolean inGame = false;
-	public static Map map;
-	public static Pathfinder path;
-	public static Screen screen;
-	public static List<Mob> mobs = new ArrayList<Mob>();
-	public static List<Tower> towers = new ArrayList<Tower>();
-	public static float standardMovementSpeed; // will bet set to 1/2 a tile per second
+	public static Boolean inGame = false;		// variable used for checking the state of the game
+	public static Map map;						// one map per instance of game
+	public static Pathfinder path;				// public pathfinder for mob's use
+	public static Screen screen;				// one screen per instance of game
+	public static List<Mob> mobs = new ArrayList<Mob>();	// holds all of the mobs for a given level
+	public static List<Tower> towers = new ArrayList<Tower>();	// holds all of the towers for a given level
+	public static double standardMovementSpeed = 0; // will bet set to 1/2 a tile per second
 	
 	// game constructor, calls init
 	public Game() {
@@ -45,35 +46,39 @@ public class Game implements Runnable {
 	
 	// creates new instance of map and screen
 	private void init() {
-		map = new Map(15, 15);
-		path = new Pathfinder();
+		map = new Map(15, 15); 			// creates a new map of the size 15 by 15 - will be replaced with map config file
+		path = new Pathfinder();		// creates our pathfinder and initiates
 		path.init();
-		screen = new Screen(this);
-		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2) / 60; // move commands will be called 60 times a second
+		screen = new Screen(this);		// creates our screen, which is essentially our graphics handler
+		standardMovementSpeed = (map.getTile(0, 0).getWidth() / 2.0) / 60.0; // move commands will be called 60 times a second
+		mobs = new ArrayList<Mob>();
+		towers = new ArrayList<Tower>();
+		mobs.add(new TestMob());
 	}
 	
 	// the nervous system of the game, handles all background processes
 	private void tick() {
 		// First we do all of the processing for the mobs
-		Iterator<Mob> iT1 = mobs.iterator();
-		while (iT1.hasNext()) {
-			Mob m = iT1.next();
+		for (Mob m : mobs) {
 			m.tick();
 		}
 		
 		// next we process the towers
-		Iterator<Tower> iT2 = towers.iterator();
-		while (iT2.hasNext()) {
-			Tower t = iT2.next();
+		for (Tower t : towers) {
 			t.tick();
 		}
 	}
 	
 	// handles the rendering of the game, takes place after tick if needed
 	public void render() {
-		map.render();
-		
-		screen.render();
+		map.render(); 			// map creates a buffered image that will be called by screen at the end of the loop
+		for (Tower t : towers) {
+			t.render(); 		// have all of the towers render their buffered image
+		}
+		for (Mob m : mobs) {
+			m.render();			// have all of the mobs rende their buffered image
+		}
+		screen.render();		// calls for the screen to put everything together
 	}
 		
 	@Override
@@ -105,7 +110,7 @@ public class Game implements Runnable {
 
 			if (shouldRender) {
 				frames++;
-				//render();
+				render();
 			}
 
 			if (System.currentTimeMillis() - lastTimer1 > 1000) {
@@ -129,7 +134,7 @@ public class Game implements Runnable {
 		//frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		frame.add(Game.screen, BorderLayout.CENTER);
+		frame.add(Game.screen, BorderLayout.CENTER);	// adding the screen to the frame seems to force a render, trying to find workaround
 		frame.setVisible(true);
 		
 		game.run();
