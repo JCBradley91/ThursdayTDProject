@@ -22,7 +22,7 @@ public class Mob extends Entity {
 	private float fireResist, iceResist, lightningResist, earthResist;
 	private int tilesTraveled;
 	private BufferedImage mobRender;
-	private boolean targetTileChange;
+	private boolean targetTileChange, cornerWalk;
 	private int facingDirection, oldDirection;
 	private long enterTileTime;
 
@@ -96,7 +96,7 @@ public class Mob extends Entity {
 		}
 		
 		// take care of actually moving
-		if (enterTileTime + 1000 > System.currentTimeMillis()) {
+		if (enterTileTime + 2000 > System.currentTimeMillis() && cornerWalk) {
 			if (oldDirection == 0) { // if facing forward
 				move2(0.0, Game.standardMovementSpeed);
 			} else if (oldDirection == 1) { // if facing right
@@ -121,19 +121,7 @@ public class Mob extends Entity {
 				move2(0.0, 0.0);
 			}
 		}
-		// take care of actually moving
-		if (facingDirection == 0) { // if facing forward
-			move2(0.0, Game.standardMovementSpeed);
-		} else if (facingDirection == 1) { // if facing right
-			move2(Game.standardMovementSpeed, 0.0);
-		} else if (facingDirection == 2) { // if facing down
-			move2(0.0, -Game.standardMovementSpeed);
-		} else if (facingDirection == 3) { // if facing left
-			move2(-Game.standardMovementSpeed, 0.0);
-		} else { // you've done something wrong
-			move2(0.0, 0.0);
-		}
-		
+		cornerWalk = !cornerWalk; // we flip this to cause the diagonal walking
 	}
 
 	// Move command, will take in standard movement speed of 1/2 tile per second
