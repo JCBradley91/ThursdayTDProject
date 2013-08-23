@@ -54,7 +54,10 @@ public class Screen extends JPanel {
 				g2d.drawImage(t.getRender(), null, 0, 0); // render all of the towers
 			}
 			for (Mob m : Game.mobs) {
-				g2d.drawImage(m.getRender(), null, 0, 0); // render all of the mobs
+				g2d.drawImage(m.getRender(), 
+						      null, 
+						      (int) m.getXRender(), 
+						      Game.map.getHeightPixels() - ((int) m.getYRender())); // render all of the mobs
 			}
 		}
 		

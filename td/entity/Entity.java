@@ -16,8 +16,8 @@ import td.graphics.Sprite;
 
 public class Entity {
 	// set up needed variables
-	protected double x;			// changed to protected from private - these probably need changed to floats?
-	protected double y;			// changed to protected from private
+	protected double x, xr;			// changed to protected from private - these probably need changed to floats?
+	protected double y, yr;			// changed to protected from private
 	protected int onTileByID;		// keeps track of what tile the entity is located inside
 	protected boolean isVisible, isAlive;	// changed to protected from private
 	protected Sprite sprite;		// Added sprite to this class for subclass use
@@ -41,6 +41,16 @@ public class Entity {
 	// returns the y position of the entity
 	public double getY() {
 		return y;
+	}
+	
+	// returns the top left corner for rendering correctly
+	public double getXRender() {
+		return xr;
+	}
+	
+	// returns the top left corner for rendering correctly
+	public double getYRender() {
+		return yr;
 	}
 	
 	// Placeholder for subclasses

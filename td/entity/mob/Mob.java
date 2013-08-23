@@ -172,6 +172,8 @@ public class Mob extends Entity {
 
 		//move1();
 		// find the tile ID, for AOE shtuff & Pathfinding
+		this.xr = x - (this.sprite.getWidth());
+		this.yr = y + (this.sprite.getHeight());
 		int tempx = (int) (x / Game.map.getTile(0, 0).getHeight()) * Game.map.getHeight();
 		int tempy = (int) (y / Game.map.getTile(0, 0).getHeight());
 		int currTile = tempx + tempy;
@@ -191,12 +193,16 @@ public class Mob extends Entity {
 
 	// renders the buffered image of the mob
 	public void render() {
-		mobRender = new BufferedImage(Game.map.getWidthPixels(),
-				Game.map.getHeightPixels(), BufferedImage.TYPE_INT_ARGB);
+		mobRender = new BufferedImage(this.sprite.getWidth() * Game.SCALE,
+				this.sprite.getHeight() * Game.SCALE, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = mobRender.createGraphics();
-		g.drawImage(this.sprite.getImage(), 
-				    ((int) x) - (this.sprite.getWidth()),
-				    Game.map.getHeightPixels() - ((int)(y) + this.sprite.getHeight()),
+//		g.drawImage(this.sprite.getImage(), 
+//				    ((int) x) - (this.sprite.getWidth()),
+//				    Game.map.getHeightPixels() - ((int)(y) + this.sprite.getHeight()),
+//				    this.sprite.getWidth() * Game.SCALE,
+//				    this.sprite.getHeight() * Game.SCALE, null);
+		g.drawImage(this.sprite.getImage(),
+				    0, 0,
 				    this.sprite.getWidth() * Game.SCALE,
 				    this.sprite.getHeight() * Game.SCALE, null);
 	}
