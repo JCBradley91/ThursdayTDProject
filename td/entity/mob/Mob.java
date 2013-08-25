@@ -43,7 +43,7 @@ public class Mob extends Entity {
 							// slows mobs
 		this.tilesTraveled = -1; // keep track of where the mob is in the path to
 								// the end
-		this.timer.scheduleAtFixedRate(new ScheduleTask(), 1000, 1000/60);
+		this.timer.scheduleAtFixedRate(new ScheduleTask(), 2000, 1000/60);
 		this.facingDirection = -1; // always fails first run
 		this.targetTileChange = true;
 		this.inTileID = -1; // always fails for first tick
