@@ -14,6 +14,8 @@ package td.map;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import td.map.tile.Tile;
+
 public class Map {
 
 	// Set up needed variables
@@ -164,6 +166,17 @@ public class Map {
 	// Changes a specific Tile in the map by x and y coordinate
 	public void changeTile(String img, int i, int k, boolean bool) {
 		mapGrid[i][k] = new Tile(img, ((i * mapHeight) + k), bool);
+		hasChanged = true;
+	}
+	
+	// Changes a specific tile by the tile's ID
+	public void changeTile(Tile t, int ID) {
+		mapGrid[(int) (Math.floor(ID / mapHeight))][(ID % mapHeight)] = t;
+		hasChanged = true;
+	}
+	
+	public void changeTile(Tile t, int i, int k) {
+		mapGrid[i][k] = t;
 		hasChanged = true;
 	}
 

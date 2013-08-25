@@ -7,7 +7,7 @@ import td.entity.Entity;
 import td.entity.mob.Mob;
 import td.entity.tower.Tower;
 import td.graphics.Sprite;
-import td.map.Tile;
+import td.map.tile.Tile;
 
 public class Bullet extends Entity {
 	
