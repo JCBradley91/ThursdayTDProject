@@ -6,7 +6,7 @@
  * 
  * Purpose: This class creates a new game tile with a sprite
  */
-package td.map;
+package td.map.tile;
 
 import td.Game;
 import td.graphics.Sprite;
@@ -23,8 +23,8 @@ public class Tile {
 	// Constructor - could maybe use a second constructor that takes in an x and y and then converts them to a tileID
 	public Tile(String img, int ID, boolean bool) {
 		this.tileID = ID;
-		sprite = new Sprite(img);
-		isPassable = bool;
+		this.sprite = new Sprite(img);
+		this.isPassable = bool;
 		this.w = sprite.getWidth() * Game.SCALE;
 		this.h = sprite.getHeight() * Game.SCALE;
 	}
