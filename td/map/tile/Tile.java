@@ -31,27 +31,27 @@ public class Tile {
 	
 	// Returns whether or not the tile can be moved through
 	public boolean canPass() {
-		return isPassable;
+		return this.isPassable;
 	}
 	
 	// Returns the tileID
 	public int getID() {
-		return tileID;
+		return this.tileID;
 	}
 	
 	// Returns the Tile height in pixels
 	public int getHeight() {
-		return h;
+		return this.h;
 	}
 	
 	// Returns the Tile width in pixels
 	public int getWidth() {
-		return w;
+		return this.w;
 	}
 	
 	// Returns the bufferedImage of the sprite
 	public Image getImage() {
-		return sprite.getImage();
+		return this.sprite.getImage();
 	}
 	
 	// Might not be needed since Map.java handles rendering the tiles

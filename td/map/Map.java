@@ -14,6 +14,10 @@ package td.map;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import td.map.tile.GrassTile;
+import td.map.tile.StreetCTile;
+import td.map.tile.StreetHTile;
+import td.map.tile.StreetVTile;
 import td.map.tile.Tile;
 
 public class Map {
@@ -39,8 +43,7 @@ public class Map {
 		mapHeight = height;
 		for (int i = 0; i < width; i++) {
 			for (int k = 0; k < height; k++) {
-				this.mapGrid[i][k] = new Tile("artAssets/Concrete.png",
-						TileID++, false);
+				this.mapGrid[i][k] = new GrassTile(TileID++);
 			}
 		}
 		mapWidthPixels = mapGrid[0][0].getWidth() * mapWidth; // Sprite width *
@@ -50,46 +53,46 @@ public class Map {
 																 // Tile height
 
 		// Test section for a simple maze to test the pathfinder
-		startTileID = (3 * width) + 0;
-		changeTile("artAssets/grass.png", 3,  0,  true);
-		changeTile("artAssets/grass.png", 3,  1,  true);
-		changeTile("artAssets/grass.png", 3,  2,  true);
-		changeTile("artAssets/grass.png", 3,  3,  true);
-		changeTile("artAssets/grass.png", 3,  4,  true);
-		changeTile("artAssets/grass.png", 4,  4,  true);
-		changeTile("artAssets/grass.png", 5,  4,  true);
-		changeTile("artAssets/grass.png", 6,  4,  true);
-		changeTile("artAssets/grass.png", 7,  4,  true);
-		changeTile("artAssets/grass.png", 8,  4,  true);
-		changeTile("artAssets/grass.png", 8,  5,  true);
-		changeTile("artAssets/grass.png", 8,  6,  true);
-		changeTile("artAssets/grass.png", 8,  7,  true);
-		changeTile("artAssets/grass.png", 8,  8,  true);
-		changeTile("artAssets/grass.png", 9,  8,  true);
-		changeTile("artAssets/grass.png", 10, 8,  true);
-		changeTile("artAssets/grass.png", 11, 8,  true);
-		changeTile("artAssets/grass.png", 11, 9,  true);
-		changeTile("artAssets/grass.png", 11, 10, true);
-		changeTile("artAssets/grass.png", 11, 11, true);
-		changeTile("artAssets/grass.png", 11, 12, true);
-		changeTile("artAssets/grass.png", 10, 12, true);
-		changeTile("artAssets/grass.png", 9,  12, true);
-		changeTile("artAssets/grass.png", 8,  12, true);
-		changeTile("artAssets/grass.png", 7,  12, true);
-		changeTile("artAssets/grass.png", 6,  12, true);
-		changeTile("artAssets/grass.png", 6,  11, true);
-		changeTile("artAssets/grass.png", 6,  10, true);
-		changeTile("artAssets/grass.png", 6,  9,  true);
-		changeTile("artAssets/grass.png", 5,  9,  true);
-		changeTile("artAssets/grass.png", 4,  9,  true);
-		changeTile("artAssets/grass.png", 3,  9,  true);
-		changeTile("artAssets/grass.png", 2,  9,  true);
-		changeTile("artAssets/grass.png", 2,  10, true);
-		changeTile("artAssets/grass.png", 2,  11, true);
-		changeTile("artAssets/grass.png", 2,  12, true);
-		changeTile("artAssets/grass.png", 2,  13, true);
-		changeTile("artAssets/grass.png", 2,  14, true);
-		endTileID = (2 * height) + 14;
+		startTileID = 45;
+		changeTile(new StreetVTile(45), 45);
+		changeTile(new StreetVTile(46), 46);
+		changeTile(new StreetVTile(47), 47);
+		changeTile(new StreetVTile(48), 48);
+		changeTile(new StreetCTile(49), 49);
+		changeTile(new StreetHTile(64), 64);
+		changeTile(new StreetHTile(79), 79);
+		changeTile(new StreetHTile(94), 94);
+		changeTile(new StreetHTile(109), 109);
+		changeTile(new StreetCTile(124), 124);
+		changeTile(new StreetVTile(125), 125);
+		changeTile(new StreetVTile(126), 126);
+		changeTile(new StreetVTile(127), 127);
+		changeTile(new StreetCTile(128), 128);
+		changeTile(new StreetHTile(143), 143);
+		changeTile(new StreetHTile(158), 158);
+		changeTile(new StreetCTile(173), 173);
+		changeTile(new StreetVTile(174), 174);
+		changeTile(new StreetVTile(175), 175);
+		changeTile(new StreetVTile(176), 176);
+		changeTile(new StreetCTile(177), 177);
+		changeTile(new StreetHTile(162), 162);
+		changeTile(new StreetHTile(147), 147);
+		changeTile(new StreetHTile(132), 132);
+		changeTile(new StreetHTile(117), 117);
+		changeTile(new StreetCTile(102), 102);
+		changeTile(new StreetVTile(101), 101);
+		changeTile(new StreetVTile(100), 100);
+		changeTile(new StreetCTile(99), 99);
+		changeTile(new StreetHTile(84), 84);
+		changeTile(new StreetHTile(69), 69);
+		changeTile(new StreetHTile(54), 54);
+		changeTile(new StreetCTile(39), 39);
+		changeTile(new StreetVTile(40), 40);
+		changeTile(new StreetVTile(41), 41);
+		changeTile(new StreetVTile(42), 42);
+		changeTile(new StreetVTile(43), 43);
+		changeTile(new StreetVTile(44), 44);
+		endTileID = 44;
 		// End test-map section
 
 //		path = new Pathfinder();
@@ -153,20 +156,6 @@ public class Map {
 			}
 		}
 		hasChanged = false;
-	}
-
-	// Changes a specific Tile in the map by Tile ID
-	public void changeTile(String img, int ID, boolean bool) {
-		// use black magic to find the location in the grid
-		mapGrid[(int) (Math.floor(ID / mapHeight))][(ID % mapHeight)] = new Tile(
-				img, ID, bool);
-		hasChanged = true;
-	}
-
-	// Changes a specific Tile in the map by x and y coordinate
-	public void changeTile(String img, int i, int k, boolean bool) {
-		mapGrid[i][k] = new Tile(img, ((i * mapHeight) + k), bool);
-		hasChanged = true;
 	}
 	
 	// Changes a specific tile by the tile's ID
