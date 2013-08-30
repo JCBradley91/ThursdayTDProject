@@ -34,6 +34,8 @@ public class Tower extends Entity {
 	protected ArrayList<Mob> targetMobs;
 	protected int targetMob;
 	
+	protected int tickCounter;
+	
 	
 	// Constructor
 	public Tower(int iTile, int kTyle, attackType aT, int aD,
@@ -56,12 +58,13 @@ public class Tower extends Entity {
 	
 	// When the turret fires, this is called and adds a new bullet to the bulletList ArrayList
 	public void shootBullet() {
-		if (!targetMobs.isEmpty()){
-			currentHeat = bulletHeat;
-			lastFireTime = System.currentTimeMillis();
-			//bulletList.add(new Bullet());
-		}
-		//bulletList.add();
+		currentHeat = bulletHeat;
+		lastFireTime = System.currentTimeMillis();
+		bulletList.add(new Bullet(x * Game.map.getTile(0, 0).getWidth(),
+								  y * Game.map.getTile(0, 0).getHeight(),
+								  bulletSpeed,
+								  this,
+								  targetMobs.get(0)));
 	}	
 
 	// We'll need a function to remove the tower for upgrading and recycling purposes
@@ -72,7 +75,8 @@ public class Tower extends Entity {
 	
 	// The backbone of the tower
 	public void tick() {
-		if (currentHeat <= 0) {
+		findTargets();
+		if (currentHeat <= 0 && !targetMobs.isEmpty()) {
 			shootBullet();
 		} else {
 			currentHeat -= (System.currentTimeMillis() - lastFireTime);
@@ -127,10 +131,10 @@ public class Tower extends Entity {
 				    this.sprite.getHeight() * Game.SCALE, null);
 		for (Bullet b: bulletList) {
 			g.drawImage(b.getSprite().getImage(),
-					    (int) b.getX(),
-					    (int) (Game.map.getHeightPixels() - b.getY()),
-					    b.getSprite().getWidth(),
-					    b.getSprite().getHeight(), null);
+					    range + ((int) b.getXTraveled()),
+					    range + (int) b.getYTraveled(),
+					    b.getSprite().getWidth() * Game.SCALE,
+					    b.getSprite().getHeight() * Game.SCALE, null);
 		}
 	}
 	

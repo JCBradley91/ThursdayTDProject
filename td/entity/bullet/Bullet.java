@@ -17,21 +17,23 @@ public class Bullet extends Entity {
 	private Mob targetMob;		// used when targeting a specific mob
 	private Tile targetTile;	// used when targeting a specific tile (AOE)
 	private Sprite sprite;
-	private int xDistance, yDistance;
+	private double xDistance, yDistance;
+	
+	private long lastTravel;
 	
 	
 	// Constructor for targeting a mob
-	public Bullet(int i, int k, int bltSpd, Tower twr, Mob targMob){
+	public Bullet(double i, double k, int bltSpd, Tower twr, Mob targMob){
 		this.x = i; 	// x coordinate - will be set by the tower's location
 		this.y = k;		// y coordinate - will be set by the tower's location
-		this.BulletSpeed = bltSpd;		// sets the bullet speed for the bullet
 		this.tower = twr;
+		this.BulletSpeed = bltSpd;		// sets the bullet speed for the bullet
 		this.targetMob = targMob;		// sets a specific mob as the target
 		this.sprite = new Sprite("artAssets/Bullet.png");	// create new sprite for the bullet
 	}
 	
 	// Constructor for targeting a Tile (for AOE)
-	public Bullet(int i, int k, int bltSpd, Tower twr, Tile targTile) {
+	public Bullet(double i, double k, int bltSpd, Tower twr, Tile targTile) {
 		this.x = i; 	// x coordinate - will be set by the tower's location
 		this.y = k;		// y coordinate - will be set by the tower's location
 		this.tower = twr;
@@ -56,6 +58,14 @@ public class Bullet extends Entity {
 		this.isAlive = false;
 	}
 	
+	public double getXTraveled() {
+		return xDistance;
+	}
+	
+	public double getYTraveled() {
+		return yDistance;
+	}
+	
 	// applies damage to a specific mob, damage and attack type called from tower that fired
 	public void doHurt(Mob m) {
 		m.takeDamage(tower.getAttackDamage(), tower.getAttackType());
@@ -64,5 +74,16 @@ public class Bullet extends Entity {
 	// returns the sprite of the bullet - used by Tower for rendering
 	public Sprite getSprite() {
 		return sprite;
+	}
+	
+	public void move() {
+		
+	}
+	
+	public void tick() {
+		if (System.currentTimeMillis() > lastTravel + (1000 / 60)) {
+			lastTravel = System.currentTimeMillis();
+			move();
+		}
 	}
 }
