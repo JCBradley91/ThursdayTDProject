@@ -173,7 +173,7 @@ public class Mob extends Entity {
 		//move1();
 		// find the tile ID, for AOE shtuff & Pathfinding
 		this.xr = x - (this.sprite.getWidth());
-		this.yr = y + (this.sprite.getHeight());
+		this.yr = Game.map.getHeightPixels() - (y + (this.sprite.getHeight()));
 		int tempx = (int) (x / Game.map.getTile(0, 0).getHeight()) * Game.map.getHeight();
 		int tempy = (int) (y / Game.map.getTile(0, 0).getHeight());
 		int currTile = tempx + tempy;

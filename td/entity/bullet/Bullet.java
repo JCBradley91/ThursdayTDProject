@@ -17,25 +17,27 @@ public class Bullet extends Entity {
 	private Mob targetMob;		// used when targeting a specific mob
 	private Tile targetTile;	// used when targeting a specific tile (AOE)
 	private Sprite sprite;
+	private int xDistance, yDistance;
 	
 	
 	// Constructor for targeting a mob
-	public Bullet(int i, int k, int bltSpd, int bltDmg, Tower twr, Mob targMob, String spriteLocation){
+	public Bullet(int i, int k, int bltSpd, Tower twr, Mob targMob){
 		this.x = i; 	// x coordinate - will be set by the tower's location
 		this.y = k;		// y coordinate - will be set by the tower's location
 		this.BulletSpeed = bltSpd;		// sets the bullet speed for the bullet
 		this.tower = twr;
 		this.targetMob = targMob;		// sets a specific mob as the target
-		this.sprite = new Sprite(spriteLocation);	// create new sprite for the bullet
+		this.sprite = new Sprite("artAssets/Bullet.png");	// create new sprite for the bullet
 	}
 	
 	// Constructor for targeting a Tile (for AOE)
-	public Bullet(int i, int k, int bltSpd, Tile targTile, String spriteLocation) {
+	public Bullet(int i, int k, int bltSpd, Tower twr, Tile targTile) {
 		this.x = i; 	// x coordinate - will be set by the tower's location
 		this.y = k;		// y coordinate - will be set by the tower's location
+		this.tower = twr;
 		this.BulletSpeed = bltSpd;		// sets the bullet speed for the bullet
 		this.targetTile = targTile;		// sets a specific tile as the target (for AOE)
-		this.sprite = new Sprite(spriteLocation);	// create new sprite for the bullet
+		this.sprite = new Sprite("artAssets/Bullet.png");	// create new sprite for the bullet
 	}
 	
 	// sets isAlive to false to trigger the death animation (explosion for bullets?)
@@ -56,7 +58,7 @@ public class Bullet extends Entity {
 	
 	// applies damage to a specific mob, damage and attack type called from tower that fired
 	public void doHurt(Mob m) {
-		m.takeDamage(tower.attackDamage, tower.atkTyp);
+		m.takeDamage(tower.getAttackDamage(), tower.getAttackType());
 	}
 	
 	// returns the sprite of the bullet - used by Tower for rendering

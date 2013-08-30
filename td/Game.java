@@ -19,6 +19,7 @@ import td.map.Map;
 import td.map.pathfinder.Pathfinder;
 import td.entity.mob.Mob;
 import td.entity.mob.TestMob;
+import td.entity.tower.TestTower;
 import td.entity.tower.Tower;
 import td.graphics.Screen;
 
@@ -54,6 +55,7 @@ public class Game implements Runnable {
 		mobs = new ArrayList<Mob>();
 		towers = new ArrayList<Tower>();
 		mobs.add(new TestMob());
+		towers.add(new TestTower(7,9));
 	}
 	
 	// the nervous system of the game, handles all background processes
