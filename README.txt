@@ -1,3 +1,21 @@
+Last edit by: Jon Bradley 6/15/2014
+
+
+This project is a personal attempt at creating a prototype game engine.
+It was designed around creating a tower-defense style game using Java Swing.
+Development was halted at the end of summer '13 by the beginning of my final time at undergrad.
+
+In its current state, the engine loads and renders a hard-coded map with passable and impassable tiles in a grid format.
+Upon map creation, a pathfinding algorithm is run to determine pathing for the mob AI
+AI zombies are then spawned in and use the stored path to navigate the map
+
+The art assets are not currently publicly available and the engine will throw null errors without them.
+However, the engine is capable of using any size of image file, as long as each 'tile' is the same pixel x pixel.
+The engine will also accept any size of image for AI mobs.  We used 21 x 21 for tiles, and 9 x 15 for mobs
+The engine is hard-coded to scale everything by 2, but this number is easily changed in Game.java
+
+
+#########################################################
 This is a tower defense game.
 
 To do:
